@@ -50,11 +50,12 @@ def build_validator(sudo_flag=False):
 
     run("git -C %s submodule update --init --recursive" % ROOT_DIR)
 
-    return run(
-        "docker build -t arb-validator -f %s/arb-validator.Dockerfile %s"
-        % (validator_root, validator_root),
-        sudo=sudo_flag,
-    )
+    return 0
+    #return run(
+    #    "docker build -t arb-validator -f %s/arb-validator.Dockerfile %s"
+    #    % (validator_root, validator_root),
+    #    sudo=sudo_flag,
+    #)
 
 
 def is_built(sudo_flag=False):

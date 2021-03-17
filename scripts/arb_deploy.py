@@ -49,7 +49,7 @@ services:
     arb-tx-aggregator:
         volumes:
             - %s:/home/user/state
-        image: arb-validator
+        image: offchainlabs/arb-validator:v0.7.3-dev4
         entrypoint: '/home/user/go/bin/arb-tx-aggregator'
         command: %s state %s %s
         ports:
@@ -68,7 +68,7 @@ COMPOSE_VALIDATOR = """
     arb-validator%d:
         volumes:
             - %s:/home/user/state
-        image: arb-validator
+        image: offchainlabs/arb-validator:v0.7.3-dev4
         command: validate %s state %s %s
 """
 
