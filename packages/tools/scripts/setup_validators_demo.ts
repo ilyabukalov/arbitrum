@@ -22,6 +22,7 @@ async function setupRollup(arbOSData: string): Promise<string> {
   const arbOSHash = Program.programMachineHash(arbOSData)
 
   const factoryAddress = addresses['contracts']['ArbFactory'].address
+  console.log("Factory", factoryAddress);
 
   const factory = abi.ArbFactoryFactory.connect(factoryAddress, wallet)
 
@@ -58,6 +59,7 @@ async function initializeWallets(count: number): Promise<ethers.Wallet[]> {
   const waits = []
   for (let i = 0; i < count; i++) {
     const newWallet = ethers.Wallet.createRandom()
+    console.log("wallet address", newWallet.address)
     const tx = {
       to: newWallet.address,
       value: ethers.utils.parseEther('5.0'),
@@ -96,6 +98,8 @@ async function setupValidators(
   const rollup = await setupRollup(arbOSData)
   console.log('Created rollup', rollup)
 
+  console.log('rollupsPath', rollupsPath);
+
   const validatorsPath = rollupsPath + 'local/'
 
   if (count < 2) {
@@ -131,6 +135,7 @@ async function setupValidators(
     const valPath = validatorsPath + 'validator' + i + '/'
     const walletPath = valPath + 'wallets/'
     fs.mkdirSync(walletPath)
+    console.log("Wallet path", walletPath);
     const encryptedWallet = await wallet.encrypt('pass')
     fs.writeFileSync(walletPath + wallet.address, encryptedWallet)
     i++
